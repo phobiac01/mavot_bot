@@ -4,7 +4,9 @@
   "description": "Lore retention and user management bot for The Dragonscape discord server",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node bot.js production",
+    "dev": "nodemon bot.js development"
   },
   "repository": {
     "type": "git",
