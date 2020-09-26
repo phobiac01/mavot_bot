@@ -3,7 +3,7 @@ var { invoker } = require('./botconfig');
 
 // Use development invoker and token if not in production
 function checkEnvironment() {
-    if (process.argv[2] === "production") {
+    if (process.argv[2] === "prod") {
         return prodToken;
     } else {
         invoker = "_";
@@ -21,8 +21,8 @@ bot.login(checkEnvironment())
     bot.user.setPresence({
       activity: {
           name: invoker + 'help',
-          type: "PLAYING",
-          url: "https://bluedragon.dev/bbot2",
+          type: "LISTENING",
+          url: "https://bluedragon.dev",
       }
     });
 
@@ -33,24 +33,27 @@ bot.on('error', (err) => {console.error("DiscordERR: ", err)});
 
 
 
+
+
 bot.on('message', message => {
     var messageContent = message.content;
     var sender = message.author;
     var now = new Date();
 
-    var firstBits = messageContent.substring(0, invoker.length);
+    var hasInvoker = messageContent.startsWith(invoker);
 
-    // Ignore message if sebder is a bot
+    // Ignore message if sender is a bot
     if (sender.bot) return;
     // Ignore message if its not a dm and doesnt have an invoker
-    if (firstBits != invoker && message.channel.type != "dm") return;
+    if (!hasInvoker && message.channel.type != "dm") return;
 
     console.log(message.content);
 
     // If invoker, remove it
-    if(firstBits === invoker) {
+    if(hasInvoker) {
         messageContent = messageContent.replace(invoker, '');
     }
+    // the content of the message, without the invoker
     messageContent = messageContent.trim();
     
     const args = messageContent.split(/ +/);
@@ -60,33 +63,12 @@ bot.on('message', message => {
         case 'hi':
         case 'hello':
         case 'hey':
+        case 'sup':
         case 'yo': {
             message.channel.send("Hello. What information do you seek?");
             break;
         }
 
-        // replace with regex expressions
-        // function parseId(rawstring) {
-        //     let obj = [
-        //       /([0-9]{18})/,
-        //       /<@!*([0-9]{18})>/
-        //     ];
-          
-        //     let resp = null;
-          
-        //     for (var index in obj) {
-        //       if (obj.hasOwnProperty(index)) {
-        //           let test = rawstring.match(obj[index]);
-        //           console.log(test);
-        //           if (test) {
-        //             console.log("found match.")
-        //             return test[1];
-        //             break;
-        //           }
-        //       }
-        //     }
-        //     throw "couldn't resolve userid";
-        //   }
         case 'botsay': {
             if (owners.indexOf(sender.id) < 0) {
                 message.channel.send("Sorry, you do not possess domain over my actions.");
