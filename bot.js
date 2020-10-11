@@ -1,5 +1,6 @@
 const { prodToken , devToken , owners } = require('./botconfig');
 var { invoker } = require('./botconfig');
+const lore = require('./lore');
 
 // Use development invoker and token if not in production
 function checkEnvironment() {
@@ -38,6 +39,7 @@ bot.on('error', (err) => {console.error("DiscordERR: ", err)});
 bot.on('message', message => {
     var messageContent = message.content;
     var sender = message.author;
+    var channel = message.channel;
     var now = new Date();
 
     var hasInvoker = messageContent.startsWith(invoker);
@@ -60,6 +62,12 @@ bot.on('message', message => {
     const command = args.shift().toLowerCase();
     
     switch (command) {
+        case 'ping': {
+            message.react('✅');
+            message.channel.send("Pong!");
+            break;
+        }
+        
         case 'hi':
         case 'hello':
         case 'hey':
@@ -104,12 +112,29 @@ bot.on('message', message => {
             break;
         }
 
-        case 'ping':
-            message.channel.send("Pong!");
+        case "whats":
+        case "what's":
+        case 'what': {
+            if (args.includes("dragonscape") || (args.includes("dragon") && args.includes("scape"))) {
+                channel.send("```" + lore.main.introduction + "```");
+
+            } else if (args.includes("sivilao") || args.includes("sivilāo") || args.includes("silvao")) {
+                channel.send("```" + lore.sivilao.introduction + "```");
+
+            } else if (args.includes("balar") || args.includes("balār") || args.includes("baal") || args.includes("bal")) {
+                channel.send("```" + lore.balar.introduction + "```");
+
+            } else if (args.includes("drekir") || args.includes("drek") || args.includes("dreker")) {
+                channel.send("```" + lore.drekir.introduction + "```");
+
+            } else {
+                channel.send("In not sure I understand your query...");
+            }
             break;
+        }
     
         default:
-            //message.channel.send("??!?!?!????!!?????!!!?!?");
+            message.channel.send("??!?!?!????!!?????!!!?!?");
             console.log("??");
             break;
     }

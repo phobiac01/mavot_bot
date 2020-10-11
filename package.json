@@ -2,11 +2,11 @@
   "name": "mavot_bot",
   "version": "1.0.0",
   "description": "Lore retention and user management bot for The Dragonscape discord server",
-  "main": "index.js",
+  "main": "bot.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node bot.js production",
-    "dev": "nodemon bot.js development"
+    "start": "node bot.js prod",
+    "dev": "nodemon bot.js dev"
   },
   "repository": {
     "type": "git",
