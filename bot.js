@@ -12,6 +12,19 @@ function checkEnvironment() {
     }
 }
 
+// == Mongoose =====================================================
+const mongoose = require('mongoose');
+
+const dburl = (process.argv[2] === "prod") ? "mongodb://db:27017/mavot" : "mongodb://localhost:27017/mavot-test;"
+mongoose.connect(dburl, {useNewUrlParser: true, useUnifiedTopology: true});
+
+// const Drekir = mongoose.model('Drek', { name: String });
+
+// const drek = new Drekir({ name: 'Zildjian' });
+// drek.save();
+
+
+// == DiscordJS =====================================================
 const Discord = require("discord.js");
 const bot = new Discord.Client();
 var botStart = new Date();
@@ -35,7 +48,7 @@ bot.on('error', (err) => {console.error("DiscordERR: ", err)});
 
 
 
-
+// == Bot Logic =====================================================
 bot.on('message', message => {
     var messageContent = message.content;
     var sender = message.author;

@@ -1,0 +1,14 @@
+version: '3'
+services:
+  node:
+    build: .
+    links:
+      - "db:mongo"
+
+  db:
+    image: "mongo"
+    volumes:
+      - db-data:/data/db
+
+volumes:
+  db-data:
