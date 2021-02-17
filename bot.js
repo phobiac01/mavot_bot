@@ -1,6 +1,6 @@
 const { prodToken , devToken , owners } = require('./botconfig');
 var { invoker } = require('./botconfig');
-const lore = require('./lore');
+// const lore = require('./lore');
 
 // Use development invoker and token if not in production
 function checkEnvironment() {
@@ -62,13 +62,13 @@ bot.on('message', message => {
     // Ignore message if its not a dm and doesnt have an invoker
     if (!hasInvoker && message.channel.type != "dm") return;
 
-    console.log(message.content);
+    console.log("]", message.content);
 
     // If invoker, remove it
     if(hasInvoker) {
         messageContent = messageContent.replace(invoker, '');
     }
-    // the content of the message, without the invoker
+    // The content of the message, without the invoker
     messageContent = messageContent.trim();
     
     const args = messageContent.split(/ +/);
@@ -129,16 +129,16 @@ bot.on('message', message => {
         case "what's":
         case 'what': {
             if (args.includes("dragonscape") || (args.includes("dragon") && args.includes("scape"))) {
-                channel.send("```" + lore.main.introduction + "```");
+                channel.send("```" + "[REDACTED]" + "```");
 
             } else if (args.includes("sivilao") || args.includes("sivilāo") || args.includes("silvao")) {
-                channel.send("```" + lore.sivilao.introduction + "```");
+                channel.send("```" + "[REDACTED]" + "```");
 
             } else if (args.includes("balar") || args.includes("balār") || args.includes("baal") || args.includes("bal")) {
-                channel.send("```" + lore.balar.introduction + "```");
+                channel.send("```" + "[REDACTED]" + "```");
 
             } else if (args.includes("drekir") || args.includes("drek") || args.includes("dreker")) {
-                channel.send("```" + lore.drekir.introduction + "```");
+                channel.send("```" + "[REDACTED]" + "```");
 
             } else {
                 channel.send("In not sure I understand your query...");
