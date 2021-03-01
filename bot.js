@@ -4,12 +4,12 @@ var { invoker } = require('./botconfig');
 
 // Use development invoker and token if not in production
 function checkEnvironment() {
-    if (process.argv[2] === "prod") {
-        return prodToken;
-    } else {
-        invoker = "_";
-        return devToken;
-    }
+//     if (process.argv[2] === "prod") {
+         return prodToken;
+//     } else {
+//         invoker = "_";
+//         return devToken;
+//     }
 }
 
 // == Mongoose =====================================================
