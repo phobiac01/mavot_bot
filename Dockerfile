@@ -8,4 +8,6 @@ RUN ["npm", "i"]
 
 COPY . .
 
+ENV PRODUCTION=true
+
 CMD ["npm", "start"]
