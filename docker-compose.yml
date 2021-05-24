@@ -1,6 +1,9 @@
-version: '3'
+# bot and api as seperate node entities in same container
+# db connected in seperate container
+
+version: "3"
 services:
-  node:
+  bot_api:
     build: .
     links:
       - "db:mongo"
