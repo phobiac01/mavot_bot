@@ -2,11 +2,11 @@ FROM node:12
 
 WORKDIR /nodeApp
 
-COPY ./bot_api/package*.json ./
+COPY ./api-bot/package*.json ./
 
 RUN ["npm", "i"]
 
-COPY ./bot_api .
+COPY ./api-bot .
 COPY ./media ./media
 
 ENV PRODUCTION=true

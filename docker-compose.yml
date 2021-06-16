@@ -3,7 +3,7 @@
 
 version: "3"
 services:
-  bot_api:
+  api-bot:
     build: .
     links:
       - "db:mongo"
