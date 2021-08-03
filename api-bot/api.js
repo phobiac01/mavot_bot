@@ -1,11 +1,11 @@
-console.log("Api code block ran.");
-
 const express = require("express");
 const api = express();
-const port = 8080;
+const port = 3030;
 
-api.get('/', (req, res) => {
-    res.sendStatus(200);
+api.use(express.static("../vue-frontend"));
+
+api.get('/api', (req, res) => {
+    res.statusCode(200).send("The api is indeed online. Please see the README file on the <a href='https://github.com/phobiac01/mavot_bot#readme'>Github Page</a> for details.");
 });
 
 api.listen(port, () => {

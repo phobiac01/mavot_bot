@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -21,7 +22,9 @@
   "dependencies": {
     "discord.js": "^12.5.3",
     "express": "^4.17.1",
-    "mongoose": "^5.12.11",
-    "nodemon": "^2.0.7"
+    "mongoose": "^5.12.11"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
   }
 }
