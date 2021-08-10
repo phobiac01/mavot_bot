@@ -33,7 +33,7 @@ bot
       },
     });
 
-    console.log(`Logged in as ${bot.user.tag}`);
+    console.log(`> Logged in as ${bot.user.tag}`);
   })
   .catch((err) => console.error(err));
 bot.on("error", (err) => {
@@ -54,7 +54,7 @@ bot.on("message", (message) => {
   // Ignore message if its not a dm and doesnt have an invoker
   if (!hasInvoker && message.channel.type != "dm") return;
 
-  console.log("]", message.content);
+  console.log(']', message.author.username + ":", message.content);
 
   // If invoker, remove it
   if (hasInvoker) {

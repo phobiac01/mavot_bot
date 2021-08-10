@@ -9,5 +9,5 @@ api.get('/api', (req, res) => {
 });
 
 api.listen(port, () => {
-  console.log(`Mavot front-end api listening at http://localhost:${port}`);
+  console.log(`] Mavot front-end api listening at http://localhost:${port}`);
 });
