@@ -43,7 +43,7 @@ bot.on("message", (message) => {
   // Ignore message if its not a dm and doesnt have an invoker
   if (!hasInvoker && message.channel.type != "dm") return;
 
-  console.log(']', message.author.username + ":", message.content);
+  console.log(`] ${message.author.username}:`, message.content);
 
   // If invoker, remove it
   if (hasInvoker) {
@@ -55,5 +55,31 @@ bot.on("message", (message) => {
   const args = messageContent.split(/ +/);
   const command = args.shift().toLowerCase();
 
-  channel.send(toString(args), toString(command));
+  // Save current query to the Users file as last interaction
+  // Match it against last bot message to see fi its a response/action event
+
+  switch(command) {
+    case 'hi':
+    case 'hiya':
+    case 'hello':
+    case 'sup':
+    case 'yo':
+    case 'henlo':
+    case 'heyo':
+    case 'hey':
+      channel.send("Hi there. How may I be of assistance?");
+      break;
+
+    case 'xd':
+    case 'lmao':
+    case 'lol':
+    case 'lmfao':
+    case 'x3':
+      channel.send("I see you have found that amusing ~");
+      break;
+
+    default:
+      channel.send("Command not found: << " + command + " >> [ " + args + " ]", 'Try typing "help" for some non-imaginary commands ~');
+      break;
+  }
 });
