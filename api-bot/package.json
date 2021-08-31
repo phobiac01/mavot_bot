@@ -22,7 +22,8 @@
   "dependencies": {
     "discord.js": "^12.5.3",
     "express": "^4.17.1",
-    "mongoose": "^5.12.11"
+    "mongoose": "^5.12.11",
+    "socket.io": "^4.2.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.12"

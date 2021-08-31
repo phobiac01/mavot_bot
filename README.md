@@ -5,13 +5,13 @@ Lore retention and user management bot for the Dragonscape discord server
 == Project Notes =============
 API Routes:
 - GET | /heartbeat | Responds with API, DB, and Bot status info
-- GET | /auth-status | Responds with current status of the provided session token
+- GET | /authState | Responds with current status of the provided session token
 - POST | /login | Sends information for logging in, responds with JWT or Error Status
-- GET | /logout | Clears active session, removes JWT cookie, closes websocket
+- POST | /logout | Clears active session, removes JWT cookie, closes websocket
 - POST | /password-change | Sends over old password, valid JWT session, and new password (encrypted and decrypted with jwt session ID)
 -=-=-=-
 - POST | /begin-websocket | Starts a fresh websocket conenction using JWT token for authentication (returns with existing session if available, otherwise starts new connection)
-- GET | /reconnect-websocket | Attempts to reconnect a websocket conenction if it exists
+- UPDATE | /reconnect-websocket | Attempts to reconnect a websocket conenction if it exists
 
 Websocket "Routes":
 // Queries are formed dynamically using the shape of the database EX: `> retrieve [group1-group2-group3-target]`

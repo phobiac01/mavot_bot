@@ -1,18 +1,7 @@
 const { prodToken, owners, invoker } = require("./botconfig");
-// const lore = require('./lore');
-
-console.log(process.env.PRODUCTION ? "PROD" : "NOT PROD");
-
-// == Mongoose =====================================================
 const mongoose = require("mongoose");
 
-const dburl = process.env.PRODUCTION
-  ? "mongodb://db:27017/mavot"
-  : "mongodb://localhost:27017/mavot-test;";
-mongoose.connect(dburl, { useNewUrlParser: true, useUnifiedTopology: true });
-
 // const Drekir = mongoose.model('Drek', { name: String });
-
 // const drek = new Drekir({ name: 'Zildjian' });
 // drek.save();
 
@@ -20,11 +9,9 @@ mongoose.connect(dburl, { useNewUrlParser: true, useUnifiedTopology: true });
 const Discord = require("discord.js");
 const bot = new Discord.Client();
 var botStart = new Date();
-bot
-  .login(prodToken)
+
+bot.login(prodToken)
   .then(() => {
-    botStart = new Date();
-    bot.user.setStatus("online");
     bot.user.setPresence({
       activity: {
         name: invoker + "help",
@@ -36,9 +23,11 @@ bot
     console.log(`> Logged in as ${bot.user.tag}`);
   })
   .catch((err) => console.error(err));
+
 bot.on("error", (err) => {
   console.error("DiscordERR: ", err);
 });
+
 
 // == Bot Logic =====================================================
 bot.on("message", (message) => {
@@ -66,5 +55,5 @@ bot.on("message", (message) => {
   const args = messageContent.split(/ +/);
   const command = args.shift().toLowerCase();
 
-  channel.send("lol bitch");
+  channel.send(toString(args), toString(command));
 });

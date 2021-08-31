@@ -1,22 +1,15 @@
 export class User {
-  constructor(disp, pass) {
-    this.displayName = disp;
-    this.password = pass;
-    this.activeSession = false;
+  constructor(userID, displayName, avatarURL) {
+    this.userID = userID;
+    this.displayName = displayName;
+    this.avatarURL = avatarURL;
   }
 
-  login(pass) {
-    if (this.activeSession) return false;
-    if (pass == this.password) {
-      this.activeSession = true;
-      return true;
-    } else return false;
+  updateDisplayName(newDisplayName) {
+    // Send UPDATE request to API
   }
 
-  logout() {
-    if (this.activeSession) {
-      this.activeSession = false;
-      return true;
-    } else return false;
+  updateAvatar(localResourceURI) {
+    // Send UPDATE request to API
   }
 }
