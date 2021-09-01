@@ -1,5 +1,3 @@
-import { Error } from "mongoose";
-
 export class AuthModule {
   constructor() {
     // Attempt to import session details from local storage
@@ -15,12 +13,12 @@ export class AuthModule {
   }
 
   // Check with the server to see if the current token is still valid
-  async verifySession() {
+  verifySession() {
     let headers = {};
     if (this.token) headers = { 'Authorization': this.token }
     else return false;
 
-    await fetch("/api/authState", {headers: headers})
+    fetch("/api/authState", {headers: headers})
       .then((res) => {
         if (res.status == 200) return true; //res.text();
         else return false;
@@ -28,7 +26,7 @@ export class AuthModule {
       .catch(console.error);
   }
 
-  async login(formDetails) {
+  login(formDetails) {
     if(this.activeSession) {
       return new Error("You are already logged in.");
 
@@ -41,7 +39,7 @@ export class AuthModule {
     }
   }
 
-  async logout() {
+  logout() {
     if(!this.activeSession) {
       return new Error("You are already logged out.");
 

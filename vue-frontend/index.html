@@ -4,10 +4,12 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-    <script src="mainScript.js" type="module" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="mainScript.js" defer></script>
+    <script src="./classes/User.js"></script>
+    <script src="./classes/Auth.js"></script>
     <link rel="stylesheet" href="styleSheet.css" />
-    <title>M.A.V.O.T. Interface</title>
+    <title>Mavot Interface</title>
   </head>
   <body>
     <div id="app">
@@ -19,13 +21,15 @@
         </ul>
       </nav>
 
+      {{ appname }}
+
       <div class="main-body">
-        <p v-if="user.activeSession">Logged in as {{ user.displayName }}</p>
+        <p v-if="auth.activeSession">Logged in as {{ user }}</p>
         <p v-else>Not logged in ~</p>
         <br />
         <input v-model="loginPasswordField" /> <br />
-        <button v-on:click="logMeInHamachi">Login</button>
-        <button v-on:click="logMeOutHamachi">Log Out</button>
+        <button v-on:click="auth.login">Login</button>
+        <button v-on:click="auth.logout">Log Out</button>
       </div>
     </div>
   </body>

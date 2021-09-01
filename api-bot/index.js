@@ -1,7 +1,5 @@
 const mongoose = require("mongoose");
-
-
-console.log(process.env.PRODUCTION ? "PROD" : "NOT PROD");
+console.log(":: " + (process.env.PRODUCTION) ? "PROD" : "NOT PROD");
 
 
 // ==== Make a connection to the database ====================
@@ -12,12 +10,51 @@ global.dburl = process.env.PRODUCTION
 mongoose.connect(dburl, { useNewUrlParser: true, useUnifiedTopology: true });
 
 
-// Entry point. Launches the bot, api, and webserver
-require('./api.js');
-require('./bot.js');
+// ==== Entry point. Launches the bot, api, and webserver ==================
+// Delay for connection to be established, then handle possible issues if needed
+setTimeout(() => {
+  if(mongoose.connection.readyState == 1) {
+      console.log(":: Database connection established");
+      launchPrograms();
+  } else {
+      process.stdout.write("Connecting to database. ");
+      handleDBConenctionWait();
+  }
+}, 500);
 
+// Check DB connection state every half second until failure or success
+let attempts = 0;
+function handleDBConenctionWait() {
+  attempts++;
+  if(attempts > 12) {
+      process.stdout.write('\n');
+      console.error(new Error("Could not establish connection to database, exiting..."));
+      process.exit(1);
+  }
 
+  if(mongoose.connection.readyState == 1) {
+      process.stdout.write('\n');
+      console.log(":: Conenction established!");
+      launchPrograms();
+
+  } else {
+      setTimeout(() => {
+          process.stdout.write('. ');
+          handleDBConenctionWait();
+      }, 500);
+  }
+}
+
+function launchPrograms() {
+  require('./api.js');
+  require('./bot.js');
+}
+
+// ==== Cleanup and closure handling =================
 // TODO: Put in proper DB closure handling with 5000ms timeout
 process.on('exit', () => {
+  if(mongoose.connection.readyState == 1) {
     mongoose.disconnect();
+    console.log(':: DB Disconnect ~');
+  }
 });

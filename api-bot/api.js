@@ -6,7 +6,7 @@ const port = 3030;
 
 
 // ==== Serve the actual website ====================
-api.use(express.static("../vue-frontend"));
+// api.use(express.static("../vue-frontend"));
 
 
 // ==== Handle REST GET Requests ====================

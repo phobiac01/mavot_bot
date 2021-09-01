@@ -25,7 +25,7 @@ bot.login(prodToken)
   .catch((err) => console.error(err));
 
 bot.on("error", (err) => {
-  console.error("DiscordERR: ", err);
+  console.error("> DiscordERR: ", err);
 });
 
 
@@ -43,7 +43,7 @@ bot.on("message", (message) => {
   // Ignore message if its not a dm and doesnt have an invoker
   if (!hasInvoker && message.channel.type != "dm") return;
 
-  console.log(`] ${message.author.username}:`, message.content);
+  console.log(`> ${message.author.username}:`, message.content);
 
   // If invoker, remove it
   if (hasInvoker) {
