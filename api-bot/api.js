@@ -1,30 +1,38 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const socket = require("socket.io");
+var cors = require('cors')
 const api = express();
 const port = 3030;
 
 
 // ==== Serve the actual website ====================
-// api.use(express.static("../vue-frontend"));
+api.use(cors());
+api.use(express.static("../vue-frontend"));
 
 
 // ==== Handle REST GET Requests ====================
 api.get('/api', (req, res) => {
-    res.statusCode(200).send("The api is indeed online. Please see the README file on the <a href='https://github.com/phobiac01/mavot_bot#readme'>Github Page</a> for details.");
+    res.status(400).send("The api is indeed online. Please see the README file on the <a href='https://github.com/phobiac01/mavot_bot#readme'>Github Page</a> for details.");
 });
 
 api.get('/api/heartbeat', (req, res) => {
-  res.statusCode(200).send("OK");
+  res.sendStatus(200);
 });
 
 api.get('/api/authState', (req, res) => {
-  res.json({authed: true});
+  console.log("]]]] ", req.headers.authorization);
+  if(req.headers.authorization == '6969420')
+    res.json({userID: 1234567890, displayName: "Default", avatarURL: "http://localhost:3030/api/avatar?1234567890"});
+  else
+    res.status(401).json({reason: "Incorrect Authorization Token"});
 });
 
 
 // ==== Handle REST POST Requests ====================
-// api.post();
+api.post('/api/login', (req, res) => {
+  res.sendStatus(501);
+});
 
 
 // ==== Handle Websocket Connections ====================

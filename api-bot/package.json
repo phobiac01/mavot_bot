@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/phobiac01/mavot_bot#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "discord.js": "^12.5.3",
     "express": "^4.17.1",
     "mongoose": "^5.12.11",
