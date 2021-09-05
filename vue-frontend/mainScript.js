@@ -29,8 +29,8 @@ class AuthModule {
 				}
 			})
 			.then((data) => {
-				console.log(data);
-				app.activeUser = new User(data);
+				console.log(JSON.stringify(data));
+				app.activeUser = new User(data.userID, data.displayName, data.avatarURL);
 			})
 			.catch(console.error);
 	}
