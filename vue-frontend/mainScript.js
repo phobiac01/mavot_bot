@@ -1,4 +1,4 @@
-let apiURL = "http://localhost:3030";
+const apiURL = "http://localhost:3030";
 
 class AuthModule {
 	constructor() {

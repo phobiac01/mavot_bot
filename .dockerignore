@@ -1,0 +1,6 @@
+node_modules
+.gitignore
+README.md
+.cron_setup_success
+.cron_setup_failure
+*.sh

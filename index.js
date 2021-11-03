@@ -48,6 +48,14 @@ function handleDBConenctionWait() {
 function launchPrograms() {
   require('./api.js');
   require('./bot.js');
+  
+  // TODO: Add Vue dev server launcher or production file replacement / installer
+  /*
+    If launched in dev mode the vue server will launch without a docker container
+    If launched in production mode a script will be run to install the updated code under var/www/mavotweb.de/html
+    This will have to be handled either in docker_compose as an environment setup script
+    Or via an manual script to be run in the root project directory (ie: 'install_vue_changes.sh')
+  /*
 }
 
 // ==== Cleanup and closure handling =================

@@ -102,3 +102,7 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Custom Ignores
+.cron_setup_success
+.cron_setup_failure
