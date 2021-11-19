@@ -55,7 +55,7 @@ function launchPrograms() {
     If launched in production mode a script will be run to install the updated code under var/www/mavotweb.de/html
     This will have to be handled either in docker_compose as an environment setup script
     Or via an manual script to be run in the root project directory (ie: 'install_vue_changes.sh')
-  /*
+  */
 }
 
 // ==== Cleanup and closure handling =================
