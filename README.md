@@ -40,3 +40,22 @@ Web Pages:
     > Change displayname
     > Change password
     > View and log out of active sessions_
+
+Bot Logic:
+- Main Logic Cycle
+    > Bot initialization
+        - DB connection (Mongodb for now, maybe Redis later if significant performance issues come up)
+        - Pull in associated libraries and generate standard responses list from DB
+        - Discord.js connection and crediential transfer
+        - Loading up of assets from DB into memory or local Redis cache (including images)
+        - Basic Database traversal, health, and connection checks
+        - Set up listeners for database update events and update associated local data caches
+    > Enter basic response pagnation mode
+        - Listen for messages in designated channel or with proper prefix (also listen to / commands via api)
+        - Message cleanup and context extraction
+        - Match messge or command through cached local responses
+        - If no local response found send message and context to database crawling function
+        - If response found, send it to source channel and log context in database for that channel
+            (Context is not attached to the user specifically, so that it isnt mixed up when jumping between public channels and dm's)
+            (This also allows a group of users to ask context-aided questions and build on another users queries in public chanels)
+    > Cron routines will run once per cycle (1 minute) and will apply completion tags and awards, as well as send out queued notifications
