@@ -1,10 +1,11 @@
-const { Schema, model } = require("mongoose");
+const { Schema, model, Mongoose } = require("mongoose");
+const date = Date.now;
 
 const userSchema = new Schema({
 	userID: Number,
 	displayName: String,
-	avatarURL: String,
-	// 0=None, 1=Stats Only, 2=Read, 3=Write, 4=Control
+	phashword: String,
+	// 0 = None, 1 = Stats Only, 2 = Read, 3 = Write, 4 = Control
 	permissionLevel: { type: Number, default: 0 },
 	firstSeen: { type: Date, default: Date.now },
 	lastSeen: { type: Date, default: Date.now },
@@ -12,28 +13,24 @@ const userSchema = new Schema({
 		{
 			token: String,
 			issueDate: { type: Date, default: Date.now },
-			validUntil: { type: Date, default: new Date(date.setMonth(date.getMonth() + 1)) },
+			validUntil: { type: Date, default: Date.now }, // new Date(date.setMonth(date.getMonth() + 1)) },
 			sourceIP: String,
 		},
 	],
-	previousCommands: [String], // Limit 5
+	previousCommands: [ {command: String, date: Date } ], // Limit 5
 	lastTopic: String,
 	subscribedToLoreUpdates: { type: Boolean, default: false },
 });
 
-const serverSchema = new Schema({
-	serverID: Number,
-	title: String,
-	iconURL: String,
-	joinDate: { type: Date, default: Date.now },
-	auth: [
-		{
-			token: String,
-			issueDate: { type: Date, default: Date.now },
-			validUntil: { type: Date, default: new Date(date.setMonth(date.getMonth() + 1)) },
-			sourceIP: String,
-		},
-	],
+const metricsSchema = new Schema({
+	botLastStarted: Date,
+	dbLastModified: [{ userID: String, date: Date, ipAddress: String }],
+	webUserLogins: [{ userID: String, date: Date, ipAddress: String }],
+	totalBotQueries: Number,
+	timesNasty: Number,
+	lastQueryDate: Date,
+	usersInteractedWith: [String], // Can be counted when needed for now
+	serversInteractedWith: [String] // Can be counted when needed for now
 });
 
 const topicSchema = new Schema({
@@ -41,13 +38,24 @@ const topicSchema = new Schema({
 	displayName: String,
 	dateAdded: { type: Date, default: Date.now },
 	lastModified: { type: Date, default: Date.now },
-    children: [Topic]
+	children: []
 });
 
-const User = model("User", userSchema);
-const Server = model("Server", serverSchema);
-const Topic = model("Topic", topicSchema);
+// const serverSchema = new Schema({
+// 	serverID: Number,
+// 	title: String,
+// 	iconURL: String,
+// 	joinDate: { type: Date, default: Date.now },
+// 	auth: [
+// 		{
+// 			token: String,
+// 			issueDate: { type: Date, default: Date.now },
+// 			validUntil: { type: Date, default: new Date(date.setMonth(date.getMonth() + 1)) },
+// 			sourceIP: String,
+// 		},
+// 	],
+// });
 
-module.exports.User = User;
-module.exports.Server = Server;
-module.exports.Topic = Topic;
+exports.User = model("User", userSchema);
+exports.Topic = model("Topic", topicSchema);
+exports.Metrics = model("Metrics", metricsSchema);

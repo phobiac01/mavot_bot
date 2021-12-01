@@ -1,0 +1,8 @@
+- Consider switching from Vue to React to make use of existing libraries and for experience with the framework
+- Set up a "Demo" user and DB for guests to explore the front end UI
+
+== To-Do:
+- Create Mongoose DB schemas
+    > User | Topic | Metrics
+- Get bot capable of basic DB queries
+- Set up basic Auth routes on the API

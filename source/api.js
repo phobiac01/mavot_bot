@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const { User, Topic, Metrics } = require("./schemas");
 const socket = require("socket.io");
 var cors = require("cors");
 const api = express();
@@ -28,7 +29,7 @@ api.get("/api/authstate", (req, res) => {
 		res.json({
 			userID: 1234567890,
 			displayName: "Default",
-			avatarURL: "http://localhost:3030/api/avatar?1234567890",
+			avatarURL: "http://api.mavotweb.de:3030/avatar",
 		});
 	else res.status(401);
 });
