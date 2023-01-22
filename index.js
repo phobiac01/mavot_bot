@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 console.log(":: " + (process.env.PRODUCTION) ? "PROD" : "NOT PROD");
+//FIXME: Fix PORD / DEV env detection
 
 
 // ==== Make a connection to the database ====================
@@ -17,7 +18,7 @@ setTimeout(() => {
       console.log(":: Database connection established");
       launchPrograms();
   } else {
-      process.stdout.write("Connecting to database. ");
+      process.stdout.write("Connecting to database . ");
       handleDBConenctionWait();
   }
 }, 500);
